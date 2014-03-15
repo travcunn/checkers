@@ -1,0 +1,13 @@
+#python specific
+*.pyc
+*.settings
+*~
+.project
+*.db
+
+#vim swp files
+*.swo
+*.swp
+
+#virtualenv
+venv
