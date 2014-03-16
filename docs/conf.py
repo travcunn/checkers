@@ -248,7 +248,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'checkers', u'checkers Documentation',
-   u'Travis Cunningham', 'checkers', 'One line description of project.',
+   u'Travis Cunningham', 'checkers', 'A simple checkers game.',
    'Miscellaneous'),
 ]
 
