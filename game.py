@@ -1,5 +1,3 @@
-import json
-
 from textcolors import colors
 
 
@@ -7,7 +5,7 @@ class Checkers(object):
     """ The checkers game. """
 
     colors = {'black': 0,
-               'red': 1}
+              'red': 1}
 
     def __init__(self, size=8):
         """
@@ -17,15 +15,7 @@ class Checkers(object):
         self.__board = []
         self.__size = size
 
-        # starts with the red player
-        self.__turn = colors['red']
-
         self.reset()
-
-    @property
-    def turn(self):
-        """ Returns the player whose turn it is. """
-        return self.__turn
 
     @property
     def board(self):
@@ -38,11 +28,27 @@ class Checkers(object):
         :param src: The piece to move
         :param dest: The piece destination
         """
-        pass
+        x_src, y_src = src
+        x_dest, y_dest = dest
+
+        piece = self.__board[y_src][x_src]
+        if piece is None:
+            raise KeyError("There is no game piece at this location.")
+
+        dest_piece = self.__board[y_dest][x_dest]
+        if dest_piece is None:  # check that nothing is in the spot
+            move = x_dest - x_src, y_dest - y_src
+            if move in piece.possible_moves:
+                self.__board[y_src][x_src] = None
+                self.__board[y_dest][x_dest] = piece
+            else:
+                raise MoveError("That move is invalid.")
+        else:
+            raise MoveError("There is already a piece in this spot.")
 
     def reset(self):
         # populate the board with None
-        self.__board = [[None for y in range(self.__size)] \
+        self.__board = [[None for y in range(self.__size)]
                         for x in range(self.__size)]
 
         # populate the board with game pieces
@@ -61,11 +67,11 @@ class Checkers(object):
                     if (x % 2 == 1) and (y % 2 == 0):
                         self.__board[x][y] = Piece(self.colors['black'])
 
-    def display(self):
+    def display(self):  # pragma: no cover
         new_line = "\n"
         output = ""
 
-        output = output + "|"
+        output = output + new_line + "|"
         for top_border in range(len(self.__board) * 1):
             output = output + str("===")
         output = output + "|" + new_line
@@ -109,9 +115,9 @@ class Piece(object):
         self.__is_king = False
 
         if self.__color is Checkers.colors['red']:
-            self.__possible_moves = [(1, 1), (1, -1)]
+            self.__possible_moves = [(1, 1), (-1, 1)]
         else:
-            self.__possible_moves = [(-1, -1), (-1, 1)]
+            self.__possible_moves = [(-1, -1), (1, -1)]
 
     @property
     def color(self):
@@ -135,3 +141,7 @@ class Piece(object):
 
     def __repr__(self):
         return "<GamePiece: %s>" % (self.color)
+
+
+class MoveError(Exception):
+    pass
