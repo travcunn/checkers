@@ -83,21 +83,7 @@ class PieceTest(unittest.TestCase):
         c.move(src=(1, 2), dest=(2, 3))
         c.move(src=(2, 3), dest=(3, 4))
 
-        # make sure the destination is empty
-        self.assertTrue(c.board[3][4] is None)
-        # jump a black piece over the red piece
-        c.move(src=(2, 5), dest=(4, 3))
-        # make sure the piece is at the destination
-        self.assertTrue(c.board[3][4].color is Checkers.colors['black'])
-        # make sure the jumped piece is removed from the board
-        self.assertTrue(c.board[4][3] is None)
-
-    def test_invalid_jump(self):
-        c = Checkers()
-
-        # try jumping over the same colored piece
-        with self.assertRaises(MoveError):
-            c.move(src=(2, 1), dest=(0, 3))
+        c.display()
 
 
 if __name__ == '__main__':

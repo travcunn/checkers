@@ -44,6 +44,15 @@ class Checkers(object):
             if move in piece.possible_moves:
                 self.__board[y_src][x_src] = None
                 self.__board[y_dest][x_dest] = piece
+            elif abs(move[0]) > 1 and abs(move[1]) > 1:
+                jump_over = move[0]/2 + y_dest, move[1]/2 + x_dest
+                jump_piece = self.__board[jump_over[0]][jump_over[1]]
+                if jump_piece.color == piece.color:
+                    raise MoveError("You can't jump over same colored piece.")
+                else:
+                    self.__board[jump_over[0]][jump_over[1]] = None
+                    self.__board[y_dest][x_dest] = piece
+                    self.__board[y_src][x_src] = None
             else:
                 raise MoveError("That move is invalid.")
         else:
@@ -108,12 +117,11 @@ class Checkers(object):
 
 
 class Piece(object):
-    """ Represents a game piece given a color. """
+    """ Represents a game piece given a color.
+
+    :param color: (int) The color of the game piece
+    """
     def __init__(self, color):
-        """
-        Args:
-            color (int): The color of the game piece
-        """
         self.__color = color
         self.__is_king = False
 
@@ -124,18 +132,33 @@ class Piece(object):
 
     @property
     def color(self):
+        """ The color of the piece.
+
+        :returns: int -- the color
+        """
         return self.__color
 
     @property
     def is_king(self):
+        """ Returns whether or not the piece is a king.
+
+        :returns: bool
+        """
         return self.__is_king
 
     @property
     def possible_moves(self):
+        """ Returns the possible moves.
+
+        :returns: list of (x, y) tuples
+        """
         return self.__possible_moves
 
     def king(self):
-        """ Sets the piece to a king. """
+        """ Sets the piece to a king.
+
+        :returns: None
+        """
         self.__is_king = True
 
         # expand the possible moves

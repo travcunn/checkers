@@ -2,7 +2,7 @@
 omit =
     tests.py
 include =
-    game.py
+    checkers/*
 
 
 [report]

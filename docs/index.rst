@@ -1,4 +1,4 @@
-Welcome to checkers's documentation!
+Checkers
 ====================================
 
 Contents:
@@ -6,10 +6,10 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-.. autoclass:: game.Checkers
+.. autoclass:: checkers.Checkers
     :members:
 
-.. autoclass:: game.Piece
+.. autoclass:: checkers.Piece
     :members:
 
 Indices and tables

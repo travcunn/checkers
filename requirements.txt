@@ -2,4 +2,5 @@ argparse==1.2.1
 colorama
 coverage
 distribute==0.6.34
+sphinx_rtd_theme
 wsgiref==0.1.2
