@@ -1,6 +1,6 @@
 import unittest
 
-from game import Checkers, Piece, MoveError
+from checkers import Checkers, Piece, MoveError
 
 
 class CheckersTest(unittest.TestCase):

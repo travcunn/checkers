@@ -1,4 +1,7 @@
-from textcolors import colors
+from colorama import init, Back
+
+# enable colorama
+init()
 
 
 class Checkers(object):
@@ -81,9 +84,9 @@ class Checkers(object):
             for y in range(len(self.__board)):
                 # generate red squares
                 if (x % 2 == 0) and (y % 2 == 1):
-                    output = output + colors['on_red']
+                    output = output + Back.RED
                 if (x % 2 == 1) and (y % 2 == 0):
-                    output = output + colors['on_red']
+                    output = output + Back.RED
                 # X, O, or blank
                 space = self.__board[x][y]
                 if space is not None:
@@ -93,7 +96,7 @@ class Checkers(object):
                         output = output + " X "
                 else:
                     output = output + "   "
-                output = output + colors['default']
+                output = output + Back.RESET
             output = output + "|" + new_line
 
         output = output + "|"
