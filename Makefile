@@ -18,4 +18,4 @@ docs:
 
 verify:
 	pyflakes checkers
-	pep8 --ignore=E128 checkers/*.py
+	pep8 checkers
