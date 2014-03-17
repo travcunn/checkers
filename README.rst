@@ -5,4 +5,5 @@ checkers
 
 Simple checkers game
 
-.. image:: https://raw.github.com/travcunn/checkers/master/misc/console.png
+[![Console checkers](https://raw.github.com/travcunn/checkers/master/misc/console.png)]
+
